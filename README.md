@@ -1,4 +1,5 @@
 # Meaning Check
+**Try it live: https://pagyemang-dotcom--meaning-check-web-web.us-east.modal.run/** (scenarios open instantly; a new message wakes the GPU readers, which takes a few minutes after a pause).
 
 **Version 2.1: click any reader to see exactly how it read your message.** Every message is read by two Meta models.** Muse Glimmer readers (16) and Muse Spark readers (8) read
 your message; it counts as misread if either model's readers misread it, and the fix is the shortest wording both
