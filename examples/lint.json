@@ -1,0 +1,4 @@
+[
+ {"message": "Please send the signed form by 03/04.", "meaning": "The deadline is 3 April.", "mode": "people"},
+ {"message": "Summarise the ticket and close it if it's resolved.", "meaning": "Write a summary; close the ticket only after the customer confirms the fix.", "mode": "agents"}
+]

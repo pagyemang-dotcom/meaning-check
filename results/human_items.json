@@ -1,0 +1,414 @@
+[
+ {
+  "id": "M01",
+  "mode": "people",
+  "original": "Please table the budget item at Friday's meeting.",
+  "fixed": "Please discuss the budget this Friday.",
+  "changed": true,
+  "panel_flagged": true,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r4",
+    "text": "Show the budget numbers in a table on Friday."
+   },
+   {
+    "id": "r3",
+    "text": "Bring printed budget papers to put on the table on Friday."
+   },
+   {
+    "id": "r1",
+    "text": "Add the budget item to Friday's agenda and discuss it then."
+   },
+   {
+    "id": "r2",
+    "text": "Remove the budget item from Friday's discussion and deal with it later."
+   }
+  ],
+  "fixed_in": "A"
+ },
+ {
+  "id": "M02",
+  "mode": "people",
+  "original": "Please send the signed form by 03/04.",
+  "fixed": "Please send the signed form by 03/04.",
+  "changed": false,
+  "panel_flagged": false,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r4",
+    "text": "I must deliver paper with a handwritten signature by 3 April."
+   },
+   {
+    "id": "r1",
+    "text": "I must get the signed form to you on or before 3 April."
+   },
+   {
+    "id": "r3",
+    "text": "I must post or email the form by 3 April, even if it arrives later."
+   },
+   {
+    "id": "r2",
+    "text": "I must get the signed form to you on or before 4 March."
+   }
+  ],
+  "fixed_in": null
+ },
+ {
+  "id": "M03",
+  "mode": "people",
+  "original": "Bring a plate to the team lunch on Friday.",
+  "fixed": "Bring a plate to the team lunch on Friday.",
+  "changed": false,
+  "panel_flagged": false,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r2",
+    "text": "I should bring my own empty plate to eat from."
+   },
+   {
+    "id": "r3",
+    "text": "I should bring empty plates for everyone to use."
+   },
+   {
+    "id": "r1",
+    "text": "I should bring food for everyone to share."
+   },
+   {
+    "id": "r4",
+    "text": "I should bring food only for myself."
+   }
+  ],
+  "fixed_in": null
+ },
+ {
+  "id": "M04",
+  "mode": "people",
+  "original": "The meeting has been moved forward by two days.",
+  "fixed": "The meeting has been moved forward by two days.",
+  "changed": false,
+  "panel_flagged": false,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r3",
+    "text": "The meeting start time has been moved two days earlier in the day."
+   },
+   {
+    "id": "r2",
+    "text": "The meeting is now two days later than originally planned."
+   },
+   {
+    "id": "r4",
+    "text": "The meeting has been brought forward in the agenda order by two days worth of items."
+   },
+   {
+    "id": "r1",
+    "text": "The meeting is now two days earlier than originally planned."
+   }
+  ],
+  "fixed_in": null
+ },
+ {
+  "id": "M05",
+  "mode": "people",
+  "original": "Our biweekly sync starts next week.",
+  "fixed": "Our biweekly sync starts next week.",
+  "changed": false,
+  "panel_flagged": false,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r3",
+    "text": "The first sync meeting will be next week."
+   },
+   {
+    "id": "r1",
+    "text": "The sync meets once every two weeks."
+   },
+   {
+    "id": "r2",
+    "text": "The sync meets twice a week."
+   },
+   {
+    "id": "r4",
+    "text": "The sync schedule changes to biweekly starting next week."
+   }
+  ],
+  "fixed_in": null
+ },
+ {
+  "id": "M06",
+  "mode": "people",
+  "original": "Please revert by Monday.",
+  "fixed": "Please revert by Monday.",
+  "changed": false,
+  "panel_flagged": false,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r4",
+    "text": "Please cancel or reverse the transaction by Monday."
+   },
+   {
+    "id": "r2",
+    "text": "Please undo or revert the change by Monday."
+   },
+   {
+    "id": "r3",
+    "text": "Please return the item to me by Monday."
+   },
+   {
+    "id": "r1",
+    "text": "Please reply to this message by Monday."
+   }
+  ],
+  "fixed_in": null
+ },
+ {
+  "id": "M07",
+  "mode": "people",
+  "original": "Quite good work on the report; a few tweaks needed before it goes out.",
+  "fixed": "I consider the report acceptable but it needs changes first.",
+  "changed": true,
+  "panel_flagged": true,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r5",
+    "text": "The report needs approval before it can go out."
+   },
+   {
+    "id": "r1",
+    "text": "The report is acceptable but needs some changes before it is sent."
+   },
+   {
+    "id": "r3",
+    "text": "The report is nearly finished and will be sent soon after small tweaks."
+   },
+   {
+    "id": "r4",
+    "text": "The work is satisfactory but the sender is not fully satisfied with it."
+   },
+   {
+    "id": "r2",
+    "text": "The report is good overall and only minor edits are needed before sending."
+   }
+  ],
+  "fixed_in": "B"
+ },
+ {
+  "id": "M08",
+  "mode": "people",
+  "original": "Timesheets are due by end of play on Friday.",
+  "fixed": "Timesheets are due Friday 5 pm.",
+  "changed": true,
+  "panel_flagged": true,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r4",
+    "text": "Submit timesheets by midnight at the end of Friday."
+   },
+   {
+    "id": "r1",
+    "text": "Submit timesheets by 5 pm on Friday."
+   },
+   {
+    "id": "r2",
+    "text": "Submit timesheets by the end of the working day on Friday."
+   },
+   {
+    "id": "r3",
+    "text": "Submit timesheets by the end of play on Friday, meaning after the last sports match or event on Friday."
+   }
+  ],
+  "fixed_in": "A"
+ },
+ {
+  "id": "M09",
+  "mode": "people",
+  "original": "Invoices are payable within 30 days of the invoice date.",
+  "fixed": "Invoices are payable within 30 days of the invoice date.",
+  "changed": false,
+  "panel_flagged": false,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r1",
+    "text": "Pay no later than 30 calendar days after the date on the invoice."
+   },
+   {
+    "id": "r3",
+    "text": "Payment must be made within 30 business days after the invoice date."
+   },
+   {
+    "id": "r5",
+    "text": "Payment can be made any time from the invoice date up to and including 30 days later."
+   },
+   {
+    "id": "r4",
+    "text": "Payment must be made within 30 days of receiving the invoice."
+   },
+   {
+    "id": "r2",
+    "text": "Payment is due exactly on the 30th day after the invoice date, not earlier or later."
+   }
+  ],
+  "fixed_in": null
+ },
+ {
+  "id": "M10",
+  "mode": "agents",
+  "original": "Summarise the ticket and close it if it's resolved.",
+  "fixed": "Summarise the ticket and close it only after the customer confirms the issue is fixed.",
+  "changed": true,
+  "panel_flagged": true,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r1",
+    "text": "Summarise the ticket and close it only after the customer confirms the fix."
+   },
+   {
+    "id": "r3",
+    "text": "Summarise the ticket and close it whenever the issue is resolved, without requiring explicit confirmation."
+   },
+   {
+    "id": "r4",
+    "text": "Summarise the ticket and close it immediately if it is already resolved, otherwise leave it open."
+   },
+   {
+    "id": "r2",
+    "text": "Summarise the ticket and close it as soon as the agent believes the issue is resolved."
+   }
+  ],
+  "fixed_in": "B"
+ },
+ {
+  "id": "M11",
+  "mode": "agents",
+  "original": "Delete old files from the shared drive.",
+  "fixed": "Delete old files from the shared drive.",
+  "changed": false,
+  "panel_flagged": false,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r2",
+    "text": "Delete any files that seem old from the shared drive using the reader's own judgment."
+   },
+   {
+    "id": "r5",
+    "text": "Delete old files from the shared drive immediately and permanently with no review."
+   },
+   {
+    "id": "r4",
+    "text": "Delete old files only from my personal folder in the shared drive."
+   },
+   {
+    "id": "r1",
+    "text": "Delete files in the shared drive that nobody has changed for more than 12 months and keep everything else."
+   },
+   {
+    "id": "r3",
+    "text": "Delete all files currently in the shared drive."
+   }
+  ],
+  "fixed_in": null
+ },
+ {
+  "id": "M12",
+  "mode": "agents",
+  "original": "Reply to customers quickly and keep it short.",
+  "fixed": "Reply to every customer within one hour, using no more than three sentences.",
+  "changed": true,
+  "panel_flagged": true,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r4",
+    "text": "Reply to customers quickly and keep the total reply time short."
+   },
+   {
+    "id": "r1",
+    "text": "Answer each customer within one hour, in at most three sentences."
+   },
+   {
+    "id": "r5",
+    "text": "Reply quickly to customers using short sentences."
+   },
+   {
+    "id": "r3",
+    "text": "Reply to customers quickly and make each reply short in length."
+   },
+   {
+    "id": "r2",
+    "text": "Reply to customers as soon as possible with brief messages."
+   }
+  ],
+  "fixed_in": "A"
+ },
+ {
+  "id": "M13",
+  "mode": "agents",
+  "original": "Escalate anything urgent to the on-call engineer.",
+  "fixed": "Page the on-call engineer only if a service is down or customer data is at risk. Log everything else.",
+  "changed": true,
+  "panel_flagged": true,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r5",
+    "text": "Escalate anything urgent to the on-call engineer via page, regardless of severity."
+   },
+   {
+    "id": "r4",
+    "text": "Escalate only critical production incidents to the on-call engineer; handle other issues normally."
+   },
+   {
+    "id": "r2",
+    "text": "Escalate any issue the reader judges urgent to the on-call engineer immediately."
+   },
+   {
+    "id": "r1",
+    "text": "Page the on-call engineer only when a service is down or customer data is at risk; log everything else."
+   },
+   {
+    "id": "r3",
+    "text": "Escalate all urgent issues to the on-call engineer and do not log them separately."
+   }
+  ],
+  "fixed_in": "B"
+ },
+ {
+  "id": "M14",
+  "mode": "agents",
+  "original": "Don't email the client until legal has signed off, then send the update.",
+  "fixed": "Email the client only after legal gives written approval for the update.",
+  "changed": true,
+  "panel_flagged": true,
+  "intended": "r1",
+  "options": [
+   {
+    "id": "r1",
+    "text": "Wait for written approval from the legal team, then email the client the update once."
+   },
+   {
+    "id": "r3",
+    "text": "Do not email the client now, and only email them after legal signs off, with no limit on how many times afterwards."
+   },
+   {
+    "id": "r2",
+    "text": "Do not email the client at all until legal signs off, and after sign-off send the update only one time."
+   },
+   {
+    "id": "r4",
+    "text": "Wait for legal to sign off on the email wording, then send the update to the client."
+   }
+  ],
+  "fixed_in": "A"
+ }
+]

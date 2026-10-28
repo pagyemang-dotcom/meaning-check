@@ -1,0 +1,16 @@
+[
+ {"mode": "people", "message": "Please table the budget item at Friday's meeting.", "meaning": "Put the budget item on Friday's agenda and discuss it then."},
+ {"mode": "people", "message": "Please send the signed form by 03/04.", "meaning": "The deadline is 3 April."},
+ {"mode": "people", "message": "Bring a plate to the team lunch on Friday.", "meaning": "Bring a dish of food to share."},
+ {"mode": "people", "message": "The meeting has been moved forward by two days.", "meaning": "The meeting is now two days earlier than planned."},
+ {"mode": "people", "message": "Our biweekly sync starts next week.", "meaning": "The sync happens once every two weeks."},
+ {"mode": "people", "message": "Please revert by Monday.", "meaning": "Please reply to this message by Monday."},
+ {"mode": "people", "message": "Quite good work on the report; a few tweaks needed before it goes out.", "meaning": "The report is acceptable but needs some changes before it is sent."},
+ {"mode": "people", "message": "Timesheets are due by end of play on Friday.", "meaning": "Submit timesheets by 5 pm on Friday."},
+ {"mode": "people", "message": "Invoices are payable within 30 days of the invoice date.", "meaning": "Pay no later than 30 calendar days after the date on the invoice."},
+ {"mode": "agents", "message": "Summarise the ticket and close it if it's resolved.", "meaning": "Write a summary; close the ticket only after the customer confirms the fix."},
+ {"mode": "agents", "message": "Delete old files from the shared drive.", "meaning": "Delete files in the shared drive that nobody has changed for more than 12 months; keep everything else."},
+ {"mode": "agents", "message": "Reply to customers quickly and keep it short.", "meaning": "Answer each customer within one hour, in at most three sentences."},
+ {"mode": "agents", "message": "Escalate anything urgent to the on-call engineer.", "meaning": "Page the on-call engineer only when a service is down or customer data is at risk; log everything else."},
+ {"mode": "agents", "message": "Don't email the client until legal has signed off, then send the update.", "meaning": "Wait for written approval from the legal team, then email the client the update once."}
+]

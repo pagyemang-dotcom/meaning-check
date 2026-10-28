@@ -1,0 +1,585 @@
+{
+ "summary": {
+  "messages": 14,
+  "skipped": 0,
+  "heldout_before": 0.5267857142857143,
+  "heldout_after": 1.0,
+  "gain": 0.4732142857142857,
+  "gain_95ci": [
+   0.21428571428571427,
+   0.7142857142857143
+  ],
+  "H1_supported": true,
+  "H2_no_harm": 0,
+  "backend": "glimmer",
+  "H3_median_statements": 1,
+  "exploratory_baseline": 1.0,
+  "exploratory_gain_over_baseline": 0.0,
+  "exploratory_gain_over_baseline_95ci": [
+   0.0,
+   0.0
+  ]
+ },
+ "rows": [
+  {
+   "message": "Please table the budget item at Friday's meeting.",
+   "mode": "people",
+   "panel_before": 0.4375,
+   "panel_after": 1.0,
+   "heldout_before": 0.375,
+   "heldout_after": 1.0,
+   "statements": 2,
+   "rewrite": "Please add the budget item to Friday's meeting agenda for discussion.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "Please table the budget item at Friday's meeting. The budget item remains active and scheduled for Friday. Add the budget item to Friday's agenda for discussion.",
+     "rate": 1.0,
+     "words": 26,
+     "kept": 1.0
+    },
+    {
+     "name": "rewrite",
+     "text": "Please add the budget item to Friday's agenda for discussion. The budget item remains active and scheduled for Friday.",
+     "rate": 1.0,
+     "words": 19,
+     "kept": 0.625
+    },
+    {
+     "name": "shortened",
+     "text": "Add the budget item to Friday's agenda for discussion; it remains active and scheduled for Friday.",
+     "rate": 1.0,
+     "words": 16,
+     "kept": 0.5
+    },
+    {
+     "name": "direct",
+     "text": "Please add the budget item to Friday's meeting agenda for discussion.",
+     "rate": 1.0,
+     "words": 11,
+     "kept": 0.625
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.7441636680159718,
+   "writer": "Muse Glimmer",
+   "words_original": 8,
+   "words_final": 11,
+   "words_kept": 0.625,
+   "heldout_baseline": 1.0,
+   "baseline_text": "Please add the budget item to Friday's meeting agenda for discussion.",
+   "words_baseline": 11,
+   "words_kept_baseline": 0.625
+  },
+  {
+   "message": "Please send the signed form by 03/04.",
+   "mode": "people",
+   "panel_before": 0.9375,
+   "panel_after": 1.0,
+   "heldout_before": 1.0,
+   "heldout_after": 1.0,
+   "statements": 1,
+   "rewrite": "Please send the signed form by 3 April.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "Please send the signed form by 03/04. The date is written as day first then month.",
+     "rate": 1.0,
+     "words": 16,
+     "kept": 1.0
+    },
+    {
+     "name": "direct",
+     "text": "Please send the signed form by 3 April.",
+     "rate": 1.0,
+     "words": 8,
+     "kept": 0.8571428571428571
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.628523800522089,
+   "writer": "Muse Glimmer",
+   "words_original": 7,
+   "words_final": 8,
+   "words_kept": 0.8571428571428571,
+   "heldout_baseline": 1.0,
+   "baseline_text": "Please send the signed form by 3 April.",
+   "words_baseline": 8,
+   "words_kept_baseline": 0.8571428571428571
+  },
+  {
+   "message": "Bring a plate to the team lunch on Friday.",
+   "mode": "people",
+   "panel_before": 1.0,
+   "panel_after": 1.0,
+   "heldout_before": 1.0,
+   "heldout_after": 1.0,
+   "statements": 0,
+   "rewrite": "Bring a plate to the team lunch on Friday.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "Bring a plate to the team lunch on Friday.",
+     "rate": 1.0,
+     "words": 9,
+     "kept": 1.0
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.7088994036894292,
+   "writer": "Muse Glimmer",
+   "words_original": 9,
+   "words_final": 9,
+   "words_kept": 1.0,
+   "heldout_baseline": 1.0,
+   "baseline_text": "Please bring a dish of food to share at the team lunch on Friday.",
+   "words_baseline": 14,
+   "words_kept_baseline": 0.8888888888888888
+  },
+  {
+   "message": "The meeting has been moved forward by two days.",
+   "mode": "people",
+   "panel_before": 1.0,
+   "panel_after": 1.0,
+   "heldout_before": 1.0,
+   "heldout_after": 1.0,
+   "statements": 0,
+   "rewrite": "The meeting has been moved forward by two days.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "The meeting has been moved forward by two days.",
+     "rate": 1.0,
+     "words": 9,
+     "kept": 1.0
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.8371339712757617,
+   "writer": "Muse Glimmer",
+   "words_original": 9,
+   "words_final": 9,
+   "words_kept": 1.0,
+   "heldout_baseline": 1.0,
+   "baseline_text": "The meeting is now two days earlier than planned.",
+   "words_baseline": 9,
+   "words_kept_baseline": 0.3333333333333333
+  },
+  {
+   "message": "Our biweekly sync starts next week.",
+   "mode": "people",
+   "panel_before": 1.0,
+   "panel_after": 1.0,
+   "heldout_before": 1.0,
+   "heldout_after": 1.0,
+   "statements": 0,
+   "rewrite": "Our biweekly sync starts next week.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "Our biweekly sync starts next week.",
+     "rate": 1.0,
+     "words": 6,
+     "kept": 1.0
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.7674208804965019,
+   "writer": "Muse Glimmer",
+   "words_original": 6,
+   "words_final": 6,
+   "words_kept": 1.0,
+   "heldout_baseline": 1.0,
+   "baseline_text": "Our sync every two weeks starts next week.",
+   "words_baseline": 8,
+   "words_kept_baseline": 0.8333333333333334
+  },
+  {
+   "message": "Please revert by Monday.",
+   "mode": "people",
+   "panel_before": 1.0,
+   "panel_after": 1.0,
+   "heldout_before": 1.0,
+   "heldout_after": 1.0,
+   "statements": 0,
+   "rewrite": "Please revert by Monday.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "Please revert by Monday.",
+     "rate": 1.0,
+     "words": 4,
+     "kept": 1.0
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.6718228149693459,
+   "writer": "Muse Glimmer",
+   "words_original": 4,
+   "words_final": 4,
+   "words_kept": 1.0,
+   "heldout_baseline": 1.0,
+   "baseline_text": "Please reply by Monday.",
+   "words_baseline": 4,
+   "words_kept_baseline": 0.75
+  },
+  {
+   "message": "Quite good work on the report; a few tweaks needed before it goes out.",
+   "mode": "people",
+   "panel_before": 0.375,
+   "panel_after": 1.0,
+   "heldout_before": 0.0,
+   "heldout_after": 1.0,
+   "statements": 1,
+   "rewrite": "I consider the report acceptable but it needs changes first.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "Quite good work on the report; a few tweaks needed before it goes out. I consider the report acceptable but it needs changes first.",
+     "rate": 1.0,
+     "words": 24,
+     "kept": 1.0
+    },
+    {
+     "name": "rewrite",
+     "text": "I consider the report acceptable but it needs changes before it goes out.",
+     "rate": 1.0,
+     "words": 13,
+     "kept": 0.35714285714285715
+    },
+    {
+     "name": "shortened",
+     "text": "I consider the report acceptable but it needs changes first.",
+     "rate": 1.0,
+     "words": 10,
+     "kept": 0.14285714285714285
+    },
+    {
+     "name": "direct",
+     "text": "The report is acceptable but needs some changes before we send it.",
+     "rate": 1.0,
+     "words": 12,
+     "kept": 0.14285714285714285
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.7349314634921029,
+   "writer": "Muse Glimmer",
+   "words_original": 14,
+   "words_final": 10,
+   "words_kept": 0.14285714285714285,
+   "heldout_baseline": 1.0,
+   "baseline_text": "The report is acceptable but needs some changes before we send it.",
+   "words_baseline": 12,
+   "words_kept_baseline": 0.14285714285714285
+  },
+  {
+   "message": "Timesheets are due by end of play on Friday.",
+   "mode": "people",
+   "panel_before": 0.0,
+   "panel_after": 1.0,
+   "heldout_before": 0.0,
+   "heldout_after": 1.0,
+   "statements": 2,
+   "rewrite": "Timesheets are due Friday 5 pm.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "Timesheets are due by end of play on Friday. Timesheets must be submitted no later than Friday 5 pm. The deadline is 5 pm on Friday.",
+     "rate": 1.0,
+     "words": 26,
+     "kept": 1.0
+    },
+    {
+     "name": "rewrite",
+     "text": "Timesheets are due by Friday 5 pm.",
+     "rate": 1.0,
+     "words": 7,
+     "kept": 0.4444444444444444
+    },
+    {
+     "name": "shortened",
+     "text": "Timesheets are due Friday 5 pm.",
+     "rate": 1.0,
+     "words": 6,
+     "kept": 0.3333333333333333
+    },
+    {
+     "name": "direct",
+     "text": "Timesheets are due by 5:00 PM on Friday.",
+     "rate": 1.0,
+     "words": 8,
+     "kept": 0.6666666666666666
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.603953474201262,
+   "writer": "Muse Glimmer",
+   "words_original": 9,
+   "words_final": 6,
+   "words_kept": 0.3333333333333333,
+   "heldout_baseline": 1.0,
+   "baseline_text": "Timesheets are due by 5:00 PM on Friday.",
+   "words_baseline": 8,
+   "words_kept_baseline": 0.6666666666666666
+  },
+  {
+   "message": "Invoices are payable within 30 days of the invoice date.",
+   "mode": "people",
+   "panel_before": 1.0,
+   "panel_after": 1.0,
+   "heldout_before": 1.0,
+   "heldout_after": 1.0,
+   "statements": 0,
+   "rewrite": "Invoices are payable within 30 days of the invoice date.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "Invoices are payable within 30 days of the invoice date.",
+     "rate": 1.0,
+     "words": 10,
+     "kept": 1.0
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.7663560839137062,
+   "writer": "Muse Glimmer",
+   "words_original": 10,
+   "words_final": 10,
+   "words_kept": 1.0,
+   "heldout_baseline": 1.0,
+   "baseline_text": "Payment is due no later than 30 calendar days after the invoice date.",
+   "words_baseline": 13,
+   "words_kept_baseline": 0.5
+  },
+  {
+   "message": "Summarise the ticket and close it if it's resolved.",
+   "mode": "agents",
+   "panel_before": 0.0,
+   "panel_after": 1.0,
+   "heldout_before": 0.0,
+   "heldout_after": 1.0,
+   "statements": 1,
+   "rewrite": "Summarise the ticket and close it only after the customer confirms the issue is fixed.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "Summarise the ticket and close it if it's resolved. Resolved means the customer has confirmed the fix works.",
+     "rate": 1.0,
+     "words": 18,
+     "kept": 1.0
+    },
+    {
+     "name": "rewrite",
+     "text": "Summarise the ticket and close it if it is resolved. Resolved means the customer has confirmed the fix works.",
+     "rate": 1.0,
+     "words": 19,
+     "kept": 0.8888888888888888
+    },
+    {
+     "name": "shortened",
+     "text": "Summarise the ticket and close it if resolved; resolved means the customer has confirmed the fix works.",
+     "rate": 1.0,
+     "words": 17,
+     "kept": 0.7777777777777778
+    },
+    {
+     "name": "direct",
+     "text": "Summarise the ticket and close it only after the customer confirms the issue is fixed.",
+     "rate": 1.0,
+     "words": 15,
+     "kept": 0.6666666666666666
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.6399980755522847,
+   "writer": "Muse Glimmer",
+   "words_original": 9,
+   "words_final": 15,
+   "words_kept": 0.6666666666666666,
+   "heldout_baseline": 1.0,
+   "baseline_text": "Summarise the ticket and close it only after the customer confirms the issue is fixed.",
+   "words_baseline": 15,
+   "words_kept_baseline": 0.6666666666666666
+  },
+  {
+   "message": "Delete old files from the shared drive.",
+   "mode": "agents",
+   "panel_before": 1.0,
+   "panel_after": 1.0,
+   "heldout_before": 1.0,
+   "heldout_after": 1.0,
+   "statements": 0,
+   "rewrite": "Delete old files from the shared drive.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "Delete old files from the shared drive.",
+     "rate": 1.0,
+     "words": 7,
+     "kept": 1.0
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.5713920084526762,
+   "writer": "Muse Glimmer",
+   "words_original": 7,
+   "words_final": 7,
+   "words_kept": 1.0,
+   "heldout_baseline": 1.0,
+   "baseline_text": "Delete files in the shared drive that have not been modified in over 12 months.",
+   "words_baseline": 15,
+   "words_kept_baseline": 0.5714285714285714
+  },
+  {
+   "message": "Reply to customers quickly and keep it short.",
+   "mode": "agents",
+   "panel_before": 0.0,
+   "panel_after": 1.0,
+   "heldout_before": 0.0,
+   "heldout_after": 1.0,
+   "statements": 2,
+   "rewrite": "Reply to every customer within one hour, using no more than three sentences.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "Reply to customers quickly and keep it short. Limit replies to a maximum of three sentences. Answer each customer within one hour.",
+     "rate": 1.0,
+     "words": 22,
+     "kept": 1.0
+    },
+    {
+     "name": "rewrite",
+     "text": "Reply to each customer within one hour. Limit replies to a maximum of three sentences.",
+     "rate": 1.0,
+     "words": 15,
+     "kept": 0.25
+    },
+    {
+     "name": "shortened",
+     "text": "Answer each customer within one hour and limit replies to a maximum of three sentences.",
+     "rate": 1.0,
+     "words": 15,
+     "kept": 0.125
+    },
+    {
+     "name": "direct",
+     "text": "Reply to every customer within one hour, using no more than three sentences.",
+     "rate": 1.0,
+     "words": 13,
+     "kept": 0.25
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.7064190425444394,
+   "writer": "Muse Glimmer",
+   "words_original": 8,
+   "words_final": 13,
+   "words_kept": 0.25,
+   "heldout_baseline": 1.0,
+   "baseline_text": "Reply to every customer within one hour, using no more than three sentences.",
+   "words_baseline": 13,
+   "words_kept_baseline": 0.25
+  },
+  {
+   "message": "Escalate anything urgent to the on-call engineer.",
+   "mode": "agents",
+   "panel_before": 0.0,
+   "panel_after": 1.0,
+   "heldout_before": 0.0,
+   "heldout_after": 1.0,
+   "statements": 3,
+   "rewrite": "Page the on-call engineer only if a service is down or customer data is at risk. Log everything else.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "Escalate anything urgent to the on-call engineer. Page the on-call engineer for urgent issues. Do not require separate logging for urgent issues that are paged. Urgent means a service is down or customer data is at risk.",
+     "rate": 1.0,
+     "words": 37,
+     "kept": 1.0
+    },
+    {
+     "name": "rewrite",
+     "text": "Page the on-call engineer for urgent issues. Urgent means a service is down or customer data is at risk. Do not require separate logging for urgent issues that are paged.",
+     "rate": 0.1875,
+     "words": 30,
+     "kept": 0.2857142857142857
+    },
+    {
+     "name": "shortened",
+     "text": "Page the on-call engineer for urgent issues, where urgent means a service is down or customer data is at risk. Do not require separate logging for urgent issues that are paged.",
+     "rate": 0.0,
+     "words": 31,
+     "kept": 0.2857142857142857
+    },
+    {
+     "name": "direct",
+     "text": "Page the on-call engineer only if a service is down or customer data is at risk. Log everything else.",
+     "rate": 1.0,
+     "words": 19,
+     "kept": 0.2857142857142857
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.6634375671856105,
+   "writer": "Muse Glimmer",
+   "words_original": 7,
+   "words_final": 19,
+   "words_kept": 0.2857142857142857,
+   "heldout_baseline": 1.0,
+   "baseline_text": "Page the on-call engineer only if a service is down or customer data is at risk. Log everything else.",
+   "words_baseline": 19,
+   "words_kept_baseline": 0.2857142857142857
+  },
+  {
+   "message": "Don't email the client until legal has signed off, then send the update.",
+   "mode": "agents",
+   "panel_before": 0.0,
+   "panel_after": 1.0,
+   "heldout_before": 0.0,
+   "heldout_after": 1.0,
+   "statements": 2,
+   "rewrite": "Email the client only after legal gives written approval for the update.",
+   "candidates": [
+    {
+     "name": "composition",
+     "text": "Don't email the client until legal has signed off, then send the update. Legal approval is needed for the update before it is sent. Email the client only after the legal team gives written approval.",
+     "rate": 1.0,
+     "words": 35,
+     "kept": 1.0
+    },
+    {
+     "name": "rewrite",
+     "text": "Do not email the client until legal gives written approval, then send the update.",
+     "rate": 1.0,
+     "words": 14,
+     "kept": 0.6923076923076923
+    },
+    {
+     "name": "shortened",
+     "text": "Email the client only after legal gives written approval for the update.",
+     "rate": 1.0,
+     "words": 12,
+     "kept": 0.46153846153846156
+    },
+    {
+     "name": "direct",
+     "text": "Do not email the client until the legal team gives written approval. Then send the update.",
+     "rate": 1.0,
+     "words": 16,
+     "kept": 0.6923076923076923
+    }
+   ],
+   "needs_question": false,
+   "letter_mass_min": 0.6219581123441458,
+   "writer": "Muse Glimmer",
+   "words_original": 13,
+   "words_final": 12,
+   "words_kept": 0.46153846153846156,
+   "heldout_baseline": 1.0,
+   "baseline_text": "Do not email the client until the legal team gives written approval. Then send the update.",
+   "words_baseline": 16,
+   "words_kept_baseline": 0.6923076923076923
+  }
+ ]
+}

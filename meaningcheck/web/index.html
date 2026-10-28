@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meaning Check</title>
+<style>
+:root{--bg:#f6f4ef;--panel:#fff;--ink:#1b1a18;--quiet:#68645c;--line:#e2ded4;--good:#1d7f47;--goodbg:#e6f4eb;--bad:#bf3f0b;--badbg:#fcece3;--warn:#8a6100;--warnbg:#fbf1d9;--accent:#3346d3;--accentbg:#eceffd;--spark:#7a3fc2;--sparkbg:#f2eafb;--shadow:0 12px 40px rgba(0,0,0,.18)}
+@media (prefers-color-scheme:dark){:root{--bg:#131312;--panel:#1c1b19;--ink:#f1eee7;--quiet:#a39e94;--line:#33312d;--good:#53c483;--goodbg:#13281b;--bad:#f2895b;--badbg:#2f1a11;--warn:#e7b94d;--warnbg:#2c2410;--accent:#8e9cff;--accentbg:#1c2040;--spark:#c39af0;--sparkbg:#271b36;--shadow:0 12px 40px rgba(0,0,0,.6)}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:24px 16px 64px}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+h1{font-size:30px;margin:0;letter-spacing:-.5px}h1 span{color:var(--accent)}.tag{color:var(--quiet);margin-top:4px;max-width:660px}
+.models{display:flex;gap:6px;flex-wrap:wrap}.pill{font-size:12px;padding:3px 10px;border-radius:20px;border:1px solid var(--line);background:var(--panel);color:var(--quiet)}
+.pill.ok{color:var(--good);border-color:var(--good)}.pill.g{color:var(--accent);border-color:var(--accent)}.pill.s{color:var(--spark);border-color:var(--spark)}
+nav.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:16px;overflow-x:auto}
+nav.tabs button{border:none;background:none;border-bottom:2px solid transparent;border-radius:0;padding:10px 14px;color:var(--quiet);font-weight:600;white-space:nowrap}
+nav.tabs button.on{color:var(--accent);border-bottom-color:var(--accent)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+textarea,input[type=text]{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+textarea{min-height:76px;resize:vertical}label{font-size:13px;color:var(--quiet);display:block;margin:12px 0 4px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+button{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:9px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--quiet)}button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+button:disabled{opacity:.5;cursor:wait}.seg button.on{background:var(--accentbg);border-color:var(--accent);color:var(--accent);font-weight:600}
+.muted{color:var(--quiet);font-size:13px}
+h2{font-size:18px;margin:0 0 6px}h3{font-size:14px;margin:14px 0 4px;color:var(--quiet);font-weight:600}
+.presets{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}@media (max-width:760px){.presets{grid-template-columns:1fr}}
+.pgroup h4{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:var(--quiet)}
+.preset{display:block;width:100%;text-align:left;font-size:13px;margin-bottom:6px;padding:8px 10px}
+.preset small{display:block;color:var(--quiet);font-size:11.5px}
+.verdict{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}.big{font-size:38px;font-weight:750;letter-spacing:-1px}
+.badge{font-weight:650;font-size:13px;padding:4px 12px;border-radius:20px}.badge.ok{background:var(--goodbg);color:var(--good)}.badge.bad{background:var(--badbg);color:var(--bad)}.badge.wait{background:var(--accentbg);color:var(--accent)}
+.banner{border-radius:10px;padding:10px 14px;margin-top:12px;font-size:14px}.banner.warn{background:var(--warnbg);color:var(--warn)}
+.meant{margin-top:10px;font-size:14px}.meant b{color:var(--good)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:8px}@media (max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+.card{border:1px solid var(--line);border-radius:11px;padding:10px;background:var(--panel);transition:background .5s,border-color .5s,transform .12s;cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%}
+.card:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.08)}.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.card.ok{border-color:var(--good);background:var(--goodbg)}.card.bad{border-color:var(--bad);background:var(--badbg)}.card.pending{opacity:.55;cursor:default}
+.card .who{font-weight:650;font-size:14px}.card .sub{font-size:12px;color:var(--quiet)}.card .reads{font-size:13px;margin-top:6px}
+.card .more{font-size:11.5px;color:var(--quiet);margin-top:4px}
+.bar{height:5px;background:var(--line);border-radius:3px;margin-top:7px;overflow:hidden}.bar i{display:block;height:100%;background:var(--good)}.card.bad .bar i{background:var(--bad)}
+.model{font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase}.model.g{color:var(--accent)}.model.s{color:var(--spark)}
+.stmt{border-left:3px solid var(--accent);padding:7px 11px;margin:8px 0;background:var(--accentbg);border-radius:0 9px 9px 0}
+.chip{display:inline-block;font-size:12px;padding:1px 8px;border-radius:10px;background:var(--badbg);color:var(--bad);margin:3px 4px 0 0}
+.diff{font-size:18px;padding:12px 14px;border-radius:10px;background:var(--bg);border:1px solid var(--line);line-height:1.8}
+.diff del{color:var(--bad);text-decoration:line-through;opacity:.8;background:var(--badbg);border-radius:4px;padding:0 2px}.diff ins{background:var(--goodbg);color:var(--good);text-decoration:none;border-radius:4px;padding:0 2px}
+.rewrite{font-size:19px;padding:12px 14px;border-radius:10px;background:var(--goodbg);border:1px solid var(--good)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.stat{border:1px solid var(--line);border-radius:11px;padding:12px}.stat b{display:block;font-size:22px;margin-top:2px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin-top:6px}th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--quiet);font-weight:600}
+tr.kept td{background:var(--goodbg)}tr.click{cursor:pointer}tr.click:hover td{background:var(--bg)}
+.tablewrap{overflow-x:auto}
+mark{background:var(--badbg);color:var(--bad);border-radius:4px;padding:0 2px}
+.hidden{display:none!important}.err{color:var(--bad)}
+.steps{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.step{font-size:12px;padding:3px 10px;border-radius:20px;background:var(--bg);color:var(--quiet);border:1px solid var(--line)}
+.step.now{color:var(--accent);border-color:var(--accent);animation:pulse 1.2s infinite}.step.done{color:var(--good);border-color:var(--good)}
+@keyframes pulse{50%{opacity:.5}}
+a{color:var(--accent)}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:10}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(520px,100%);background:var(--panel);z-index:11;box-shadow:var(--shadow);overflow-y:auto;padding:20px}
+.drawer .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.drawer h2{font-size:20px}.quote{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;white-space:pre-wrap}
+.opt{margin:8px 0}.opt .t{display:flex;justify-content:space-between;gap:8px;font-size:14px}.opt .t span:last-child{font-variant-numeric:tabular-nums;color:var(--quiet)}
+.opt .b{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:3px}.opt .b i{display:block;height:100%;background:var(--quiet)}
+.opt.meant .b i{background:var(--good)}.opt.chosen:not(.meant) .b i{background:var(--bad)}
+.tagl{font-size:11px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:6px}.tagl.m{background:var(--goodbg);color:var(--good)}.tagl.c{background:var(--badbg);color:var(--bad)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media (max-width:520px){.cols{grid-template-columns:1fr}}
+.say{font-size:15px;margin:8px 0;padding:10px 12px;border-radius:10px}.say.ok{background:var(--goodbg)}.say.bad{background:var(--badbg)}
+.arch{width:100%;height:auto}
+.theory{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Meaning <span>Check</span></h1>
+      <div class="tag">Before you send it: see who would misread your message and what they would take it to mean, then fix it with the fewest words, checked by readers from two Meta models.</div>
+    </div>
+    <div class="models"><span class="pill g">Readers: Muse Glimmer</span><span class="pill s" id="pill-s">Second opinion: Muse Spark</span><span class="pill" id="pill-w">Writer</span><span class="pill hidden" id="pill-r"></span></div>
+  </header>
+  <nav class="tabs" role="tablist">
+    <button class="on" id="tab-check" onclick="tab('check')">Check a message</button>
+    <button id="tab-evidence" onclick="tab('evidence')">Evidence</button>
+    <button id="tab-how" onclick="tab('how')">How it works</button>
+  </nav>
+
+  <section id="p-check">
+    <div class="box">
+      <div class="row seg" style="margin-top:0">
+        <button id="m-people" class="on" onclick="setMode('people')">People</button>
+        <button id="m-agents" onclick="setMode('agents')">AI agents (prompts)</button>
+        <span class="muted" id="backend"></span>
+      </div>
+      <label for="msg">Your message</label>
+      <textarea id="msg" placeholder="Paste an instruction, a policy line, a status update or a prompt for an AI agent"></textarea>
+      <label for="meaning">What you mean (one line)</label>
+      <input type="text" id="meaning" placeholder="e.g. Put the item on Friday's agenda and discuss it then">
+      <div class="row">
+        <button class="primary" id="go" onclick="run()">Check who understands</button>
+        <button onclick="pickImage()" title="Read a photographed notice or slide (Muse Spark vision)">Photo</button>
+        <button id="mic" onclick="toggleMic()" title="Speak your message (Muse Voice Transcribe)">Speak</button>
+        <input type="file" id="img" accept="image/*" class="hidden" onchange="readImage(this)">
+        <span id="status" class="muted"></span>
+      </div>
+      <div class="steps hidden" id="steps"></div>
+      <h3>Or try a scenario (one click)</h3>
+      <div class="presets" id="presets"></div>
+    </div>
+
+    <div id="out" class="hidden">
+      <div class="box">
+        <div class="verdict"><span class="big" id="v-count"></span><span id="v-text" class="muted"></span><span id="v-badge" class="badge"></span></div>
+        <div class="muted" id="recorded" style="margin-top:6px"></div><div class="meant" id="meant"></div>
+        <div id="v-banner"></div>
+        <h3><span class="model g">Muse Glimmer</span> readers <span class="muted">· click any reader to see how it read your message</span></h3>
+        <div class="grid" id="grid"></div>
+        <div id="sbox"><h3><span class="model s">Muse Spark</span> readers (second opinion)</h3><div class="grid" id="sgrid"></div></div>
+        <div class="row"><button class="primary hidden" id="fixbtn" onclick="showFix()">Fix it</button>
+          <span class="seg hidden" id="toggle"><button id="t-before" onclick="showState(false)">As written</button> <button id="t-after" class="on" onclick="showState(true)">After the fix</button></span></div>
+        <div id="notices" class="muted"></div>
+      </div>
+
+      <div class="box hidden" id="fix">
+        <h2>The fix</h2>
+        <div class="muted" id="fix-why"></div>
+        <div id="stmts"></div>
+        <h3>What changed</h3>
+        <div class="diff" id="diff"></div>
+        <h3>Send this</h3>
+        <div class="rewrite" id="rewrite"></div>
+        <div class="row"><button onclick="copyRewrite()" id="copybtn">Copy</button><button onclick="downloadReport()">Download report</button><span class="muted" id="a-text"></span></div>
+        <h3>Wordings tried</h3>
+        <div class="tablewrap"><table id="cands"></table></div>
+      </div>
+
+      <div class="box hidden" id="ctx"><h2>No single wording works for everyone</h2><div id="ctx-body"></div></div>
+
+      <div class="box hidden" id="proof">
+        <h2>Why you can trust this result</h2>
+        <div class="stats" id="stats"></div>
+        <div id="attr" style="margin-top:12px"></div>
+        <label for="mine">Test any other wording (yours, or another tool's rewrite) with the same readers</label>
+        <textarea id="mine" placeholder="Paste a wording to test"></textarea>
+        <div class="row"><button onclick="testMine()">Test this wording</button><span id="mine-out" class="muted"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="p-evidence" class="hidden">
+    <div class="box"><h2>Tested before you trust it</h2>
+      <div class="muted">Every number here comes from the result files in the repository; the predictions were written down before each run.</div>
+      <div class="stats" style="margin-top:10px" id="ev-stats"></div>
+    </div>
+    <div class="box"><h2>Every test message</h2>
+      <div class="row seg" style="margin-top:0"><button class="on" id="f-all" onclick="evFilter('all')">All 14</button><button id="f-people" onclick="evFilter('people')">For people</button><button id="f-agents" onclick="evFilter('agents')">For AI agents</button><button id="f-changed" onclick="evFilter('changed')">Changed by the tool</button></div>
+      <div class="muted" style="margin-top:8px">Click a row to see the wordings the tool tried.</div>
+      <div class="tablewrap"><table id="ev-table"></table></div>
+    </div>
+    <div class="box"><h2>What did not work</h2>
+      <ul class="muted" style="font-size:14px">
+        <li>A plain "make it clear" rewrite by the same model also reached 100% on these tests; Meaning Check's added value is the check itself and shorter fixes, not better wording on every message.</li>
+        <li>The first Muse Spark run was void because of a scoring bug (a non-answer counted as understanding); it was fixed, rerun, and both runs are kept.</li>
+        <li>The Muse Glimmer panel's flags did not fully transfer to Muse Spark, which is why every check now uses both models.</li>
+        <li>Readers are AI models given backgrounds, not people; a human study was prepared but not run.</li>
+      </ul>
+      <a href="https://github.com/pagyemang-dotcom/meaning-check/blob/main/RESULTS.md" target="_blank" rel="noopener">Full results, amendments and raw files</a>
+    </div>
+  </section>
+
+  <section id="p-how" class="hidden">
+    <div class="box"><h2>How a check works</h2>
+      <svg class="arch" viewBox="0 0 900 300" role="img" aria-label="Message flows to two reader panels, an exact solver, the writer, and back to both panels">
+        <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#888"/></marker></defs>
+        <g fill="none" stroke="#888" stroke-width="1.4">
+          <rect x="10" y="115" width="140" height="70" rx="10"/><rect x="200" y="30" width="170" height="80" rx="10" stroke="var(--accent)"/><rect x="200" y="190" width="170" height="80" rx="10" stroke="var(--spark)"/>
+          <rect x="420" y="115" width="150" height="70" rx="10"/><rect x="620" y="115" width="130" height="70" rx="10"/><rect x="790" y="115" width="100" height="70" rx="10" stroke="var(--good)"/>
+          <path d="M150 140 L198 75" marker-end="url(#ar)"/><path d="M150 160 L198 225" marker-end="url(#ar)"/>
+          <path d="M370 70 L418 135" marker-end="url(#ar)"/><path d="M370 230 L418 165" marker-end="url(#ar)"/>
+          <path d="M570 150 L618 150" marker-end="url(#ar)"/><path d="M750 150 L788 150" marker-end="url(#ar)"/>
+          <path d="M685 115 C685 40 470 20 372 50" stroke-dasharray="4 4" marker-end="url(#ar)"/><path d="M685 185 C685 260 470 285 372 250" stroke-dasharray="4 4" marker-end="url(#ar)"/>
+        </g>
+        <g font-size="13" fill="var(--ink)" text-anchor="middle" font-family="system-ui,sans-serif">
+          <text x="80" y="145" font-weight="600">Your message</text><text x="80" y="163" fill="var(--quiet)" font-size="11.5">+ what you mean</text>
+          <text x="285" y="62" font-weight="600" fill="var(--accent)">Muse Glimmer</text><text x="285" y="80" font-size="11.5" fill="var(--quiet)">16 readers, open weights</text><text x="285" y="96" font-size="11.5" fill="var(--quiet)">token probabilities</text>
+          <text x="285" y="222" font-weight="600" fill="var(--spark)">Muse Spark</text><text x="285" y="240" font-size="11.5" fill="var(--quiet)">8 readers, Meta API</text><text x="285" y="256" font-size="11.5" fill="var(--quiet)">second opinion</text>
+          <text x="495" y="145" font-weight="600">Exact cover</text><text x="495" y="163" font-size="11.5" fill="var(--quiet)">fewest facts (HiGHS)</text>
+          <text x="685" y="145" font-weight="600">Writer</text><text x="685" y="163" font-size="11.5" fill="var(--quiet)">4 candidate wordings</text>
+          <text x="840" y="145" font-weight="600" fill="var(--good)">Send</text><text x="840" y="163" font-size="11.5" fill="var(--quiet)">shortest that</text><text x="840" y="179" font-size="11.5" fill="var(--quiet)">both models read</text>
+          <text x="560" y="24" font-size="11.5" fill="var(--quiet)">every candidate re-read by both models</text>
+        </g>
+      </svg>
+      <ol style="font-size:14px">
+        <li><b>Readings.</b> The writer lists what your message could be taken to mean, and the facts that tell those readings apart.</li>
+        <li><b>Two panels read it.</b> 16 Muse Glimmer readers (four countries, two jobs, quick and careful reasoning) give a probability for every reading, from the answer letters in one forward pass, averaged over two option orders. 8 Muse Spark readers give a second opinion. A message is misread if either model misreads it.</li>
+        <li><b>Say enough, exactly.</b> An integer programme finds the fewest facts that rule out every reading some reader preferred, and proves nothing shorter works.</li>
+        <li><b>Write and re-read.</b> The writer turns the facts into candidate wordings; both models re-read them, and the shortest wording the most readers understand is kept.</li>
+        <li><b>Readers never used.</b> Eight further readers, never used to build the fix, test it.</li>
+      </ol>
+    </div>
+    <div class="box"><h2>The theory behind it</h2>
+      <div class="theory">
+        A message is a set of statements <i>m</i> about the intended reading <i>w</i>. Stating attribute <i>a</i> rules out the readings that differ from <i>w</i> on it, <i>E<sub>a</sub>(w)</i>. A reader acts on the reading it finds most plausible among those not ruled out; its rivals <i>Dom<sub>π</sub>(w)</i> are the readings it finds at least as plausible as <i>w</i>.<br><br>
+        <b>Audience theorem.</b> Every reader in a panel <i>R</i> understands <i>m</i> exactly when ⋃<sub>a∈m</sub> <i>E<sub>a</sub>(w)</i> ⊇ ⋃<sub>π∈R</sub> <i>Dom<sub>π</sub>(w)</i>. The shortest such <i>m</i> is a minimum set cover: NP-hard in general, small in practice, solved exactly here.<br><br>
+        <b>Sampling guarantee.</b> With 95% confidence, a message all <i>T</i> sampled readers understand is misread by a new reader from the same population with probability at most (<i>A</i> ln 2 + ln 20)/<i>T</i>, for <i>A</i> candidate statements.<br><br>
+        From <i>A Mathematical Theory of Being Understood</i> (P. Agyemang, under review at JAIR). All code in this app was written during the hackathon.
+      </div>
+    </div>
+  </section>
+  <div class="muted" id="foot">Readers: Muse Glimmer (open weights, on Modal) and Muse Spark (Meta Model API). <a href="https://github.com/pagyemang-dotcom/meaning-check" target="_blank" rel="noopener">Source code</a>.</div>
+</div>
+
+<div class="scrim hidden" id="scrim" onclick="closeReader()"></div>
+<aside class="drawer hidden" id="drawer" role="dialog" aria-modal="true" aria-labelledby="d-title" tabindex="-1"></aside>
+
+<script>
+let MODE='people',R=null,rec=null,chunks=[],INFO={},AFTER=false,CUR=null,EV=null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const flag=c=>c&&c.length===2?String.fromCodePoint(...[...c.toUpperCase()].map(x=>0x1F1E6+x.charCodeAt(0)-65)):'';
+const pct=x=>Math.round(100*x)+'%';
+const GROUPS=[['Workplace',['deadline','feedback','status']],['Words read differently',['table','date','biweekly']],['AI agent prompts',['ticket']]];
+const LABELS={deadline:'A deadline at risk, to a manager',feedback:'Feedback to a colleague',status:'A status update in a team channel',table:'"Table" an agenda item',date:'A date written 03/04',biweekly:'"Biweekly": two models disagree',ticket:'"Close it if it is resolved"',plate:'"Bring a plate"'};
+function tab(t){['check','evidence','how'].forEach(x=>{$('p-'+x).classList.toggle('hidden',x!==t);$('tab-'+x).classList.toggle('on',x===t)});if(t==='evidence')loadEvidence()}
+function setMode(m){MODE=m;$('m-people').classList.toggle('on',m==='people');$('m-agents').classList.toggle('on',m==='agents')}
+async function init(){
+  try{INFO=await (await fetch('/api/info')).json()}catch(e){$('status').innerHTML='<span class="err">Service not reachable.</span>';return}
+  $('pill-w').textContent='Writer: '+(INFO.writer||'');if(!INFO.second){$('pill-s').textContent=INFO.backend==='sim'?'Second opinion: off':'Second opinion: off (no Meta key on this app)';$('pill-s').className='pill'}
+  $('backend').textContent=INFO.backend==='sim'?'Offline demo: simulated readers':'Live';
+  if(INFO.backend==='sim')$('foot').innerHTML='Offline demo: simulated readers stand in for Muse Glimmer and Muse Spark. '+$('foot').innerHTML;
+  const ex={};INFO.examples.forEach(e=>ex[e.key]=e);INFO.ex=ex;
+  const used=new Set();let html='';
+  for(const [g,keys] of GROUPS){const ks=keys.filter(k=>ex[k]);if(!ks.length)continue;ks.forEach(k=>used.add(k));
+    html+=`<div class="pgroup"><h4>${g}</h4>`+ks.map(k=>`<button class="preset" onclick="preset('${k}')">${esc(LABELS[k]||k)}${(INFO.recorded||[]).includes(k)?' <span class="tagl m">instant</span>':''}<small>${esc(ex[k].message)}</small></button>`).join('')+'</div>'}
+  const rest=INFO.examples.filter(e=>!used.has(e.key));
+  if(rest.length)html+=`<div class="pgroup"><h4>More</h4>`+rest.map(e=>`<button class="preset" onclick="preset('${e.key}')">${esc(LABELS[e.key]||e.key)}<small>${esc(e.message)}</small></button>`).join('')+'</div>';
+  $('presets').innerHTML=html;
+  if(INFO.backend==='glimmer')wake();
+}
+// The Muse Glimmer readers run on a GPU that sleeps after 5 idle minutes; waking it (loading 58 GB) takes a few minutes.
+// The page starts waking it as soon as it opens, so it is usually ready by the time a message is typed.
+let READY=false;
+function wake(){const t0=Date.now();$('pill-r').classList.remove('hidden');$('pill-r').textContent='Readers: waking up';
+  const tick=setInterval(()=>{if(READY){clearInterval(tick);return}const s=Math.round((Date.now()-t0)/1000);$('pill-r').textContent=`Readers: waking up (${Math.floor(s/60)}:${String(s%60).padStart(2,'0')})`},1000);
+  fetch('/api/warm').then(r=>r.json()).then(w=>{READY=!!w.ready;clearInterval(tick);$('pill-r').textContent=w.ready?'Readers: ready':'Readers: not reachable';$('pill-r').className='pill '+(w.ready?'ok':'')}).catch(()=>{clearInterval(tick);$('pill-r').textContent='Readers: not reachable'})}
+function preset(k){const e=INFO.ex[k];LASTKEY=k;$('msg').value=e.message;$('meaning').value=e.meaning;setMode(e.mode);run(k)}
+function label(p){const b=p.background||'';const bg=b.includes('office')?'office worker':b.includes('small business')?'business owner':b.includes('support')?'support agent':'operations agent';
+  const rs=p.reasoning==='low'?'quick reading':p.reasoning==='high'?'careful reading':p.reasoning==='medium'?'medium reading':'';
+  return {who:`${flag(p.flag)} ${esc(p.country)}`,sub:[bg,rs].filter(Boolean).join(' · ')}}
+function card(p,res,panel,i){const l=label(p);
+  if(!res)return `<div class="card pending"><div class="who">${l.who}</div><div class="sub">${l.sub}</div><div class="reads">Reading…</div></div>`;
+  const pr=res.probs[R.case.intended]||0,ok=res.understood;
+  const txt=ok?'Understands as meant':'Reads: '+esc(R.rd[res.choice]);
+  return `<button class="card ${ok?'ok':'bad'}" onclick="openReader('${panel}',${i})" aria-label="How the reader in ${esc(p.country)} read it"><div class="who">${l.who}</div><div class="sub">${l.sub}</div><div class="reads">${txt}</div><div class="bar"><i style="width:${Math.round(100*pr)}%"></i></div><div class="more">See how it read it ›</div></button>`}
+const STAGES=['Listing the readings','Muse Glimmer readers','Muse Spark readers','Shortest fix','Checking wordings','Unseen readers'];
+let T0=0,TIMER=null,NOW='',SINCE=0;
+function drawSteps(now){if(now!==NOW){NOW=now;SINCE=Date.now()}const st=INFO.second?STAGES:STAGES.filter(s=>!s.includes('Spark'));const k=st.indexOf(now);
+  const el=Math.round((Date.now()-T0)/1000),slow=INFO.backend==='glimmer'&&!READY&&(Date.now()-SINCE)>20000&&now.includes('Glimmer');
+  $('steps').classList.remove('hidden');$('steps').innerHTML=st.map((s,i)=>`<span class="step ${i<k?'done':i===k?'now':''}">${s}</span>`).join('')+
+    `<span class="step">${Math.floor(el/60)}:${String(el%60).padStart(2,'0')}</span>`+(slow?'<div class="muted" style="flex-basis:100%">The readers are waking up after a pause (loading the model takes a few minutes, once). The one-click scenarios marked "instant" open straight away.</div>':'')}
+function startTimer(){T0=Date.now();NOW='';clearInterval(TIMER);TIMER=setInterval(()=>{if(NOW)drawSteps(NOW)},1000)}
+function stopTimer(){clearInterval(TIMER);TIMER=null}
+async function run(key,live){
+  if(!key&&!$('msg').value.trim()){$('status').innerHTML='<span class="err">Type a message first.</span>';return}
+  $('go').disabled=true;$('status').textContent='';closeReader();R={partial:true};AFTER=false;
+  $('out').classList.add('hidden');['fix','ctx','proof'].forEach(x=>$(x).classList.add('hidden'));$('fixbtn').classList.add('hidden');$('toggle').classList.add('hidden');$('v-banner').innerHTML='';
+  $('recorded').innerHTML='';startTimer();drawSteps('Listing the readings');
+  try{
+    const resp=await fetch('/api/check_stream',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:$('msg').value,meaning:$('meaning').value,mode:MODE,example:key||'',live:!!live})});
+    if(!resp.ok||!resp.body)throw new Error('The check could not start.');
+    const reader=resp.body.getReader(),dec=new TextDecoder();let buf='';
+    for(;;){const {value,done}=await reader.read();if(done)break;buf+=dec.decode(value,{stream:true});
+      let i;while((i=buf.indexOf('\n\n'))>=0){const block=buf.slice(0,i);buf=buf.slice(i+2);
+        const ev=(block.match(/^event: (.*)$/m)||[])[1],raw=(block.match(/^data: (.*)$/m)||[])[1];if(ev)onEvent(ev,raw?JSON.parse(raw):null)}}
+  }catch(e){$('status').innerHTML=`<span class="err">${esc(e.message)}</span>`;$('steps').classList.add('hidden')}
+  finally{$('go').disabled=false;stopTimer()}
+}
+let LASTKEY='';
+function onEvent(ev,d){
+  if(ev==='personas'){R.personas=d}
+  else if(ev==='stage'){drawSteps(d.name)}
+  else if(ev==='case'){R.case=d;R.rd={};d.readings.forEach(x=>R.rd[x.id]=x.text);$('out').classList.remove('hidden');partial();$('out').scrollIntoView({behavior:'smooth'})}
+  else if(ev==='before'){R.before=d;READY=true;$('pill-r').textContent='Readers: ready';$('pill-r').className='pill ok';partial()}
+  else if(ev==='second_before'){R.second={before:d};partial()}
+  else if(ev==='error'){$('status').innerHTML=`<span class="err">${esc(d.detail)}</span>`;$('steps').classList.add('hidden');stopTimer()}
+  else if(ev==='done'){const took=Math.round((Date.now()-T0)/1000);stopTimer();R=d;R.rd={};R.case.readings.forEach(x=>R.rd[x.id]=x.text);$('steps').classList.add('hidden');render();
+    $('recorded').innerHTML=d.recorded_at?`Recorded live run (${esc(d.recorded_at)}), replayed so it opens instantly. <button onclick="run(LASTKEY,true)">Run it live now</button>`:`Checked live in ${took} s.`;
+    if(!R.attribution)fetchAttribution()}
+}
+function partial(){if(!R.case||!R.personas)return;
+  $('meant').innerHTML=`You mean: <b>${esc(R.rd[R.case.intended])}</b>`;
+  $('grid').innerHTML=R.personas.build.map((p,i)=>card(p,R.before&&R.before[i],'build',i)).join('');
+  const sp=INFO.second&&R.personas.second;$('sbox').classList.toggle('hidden',!sp);
+  if(sp)$('sgrid').innerHTML=R.personas.second.map((p,i)=>card(p,R.second&&R.second.before&&R.second.before[i],'second',i)).join('');
+  if(R.before){const n=R.before.filter(x=>x.understood).length;$('v-count').textContent=`${n} of ${R.before.length}`;$('v-text').textContent='Muse Glimmer readers understand it as you meant';$('v-badge').className='badge wait';$('v-badge').textContent='Still checking…'}
+}
+function counts(after){const g=after?R.after:R.before;const s=R.second?(after?R.second.after:R.second.before):[];
+  return {n:g.filter(x=>x.understood).length+s.filter(x=>x.understood).length,t:g.length+s.length,g,s}}
+function verdict(after){const c=counts(after);$('v-count').textContent=`${c.n} of ${c.t}`;
+  $('v-text').textContent=(after?'readers understand the fixed message':'readers understand it as you meant')+(R.second?' (two Meta models)':'');
+  const all=c.n===c.t;$('v-badge').className='badge '+(all?'ok':'bad');$('v-badge').textContent=all?'Ready to send':`Misread by ${c.t-c.n}`;
+  let ban='';if(R.second&&!after){const gs=c.g.filter(x=>x.understood).length/c.g.length,ss=c.s.filter(x=>x.understood).length/c.s.length;
+    if(gs===1&&ss<1)ban=`Every Muse Glimmer reader understands it, but ${c.s.length-c.s.filter(x=>x.understood).length} of ${c.s.length} Muse Spark readers do not. One model's readers can miss what another's catch.`;
+    else if(ss===1&&gs<1)ban='Every Muse Spark reader understands it, but some Muse Glimmer readers do not.'}
+  if(R.second&&after&&R.second.after_rate<1)ban=`${c.s.length-c.s.filter(x=>x.understood).length} of ${c.s.length} Muse Spark readers still misread the best wording found. Try stating the meaning more fully, and test it below.`;
+  $('v-banner').innerHTML=ban?`<div class="banner warn">${esc(ban)}</div>`:''}
+function grids(after){const P=R.personas;$('grid').innerHTML=P.build.map((p,i)=>card(p,(after?R.after:R.before)[i],'build',i)).join('');
+  if(R.second){$('sbox').classList.remove('hidden');$('sgrid').innerHTML=P.second.map((p,i)=>card(p,(after?R.second.after:R.second.before)[i],'second',i)).join('')}else $('sbox').classList.add('hidden')}
+function showState(after){AFTER=after;verdict(after);grids(after);$('t-before').classList.toggle('on',!after);$('t-after').classList.toggle('on',after);if(CUR)openReader(CUR.panel,CUR.i)}
+function render(){$('meant').innerHTML=`You mean: <b>${esc(R.rd[R.case.intended])}</b>`;
+  verdict(false);grids(false);$('out').classList.remove('hidden');$('toggle').classList.add('hidden');
+  $('notices').textContent=(R.log||[]).filter(x=>/instead|paused/.test(x)).join(' ');
+  const c=counts(false);$('fixbtn').classList.remove('hidden');$('fixbtn').textContent=c.n===c.t&&!R.statements.length?'Show the evidence':'Fix it'}
+function diffWords(a,b){const A=a.split(/\s+/),B=b.split(/\s+/),n=A.length,m=B.length,L=Array.from({length:n+1},()=>new Array(m+1).fill(0));
+  const norm=w=>w.toLowerCase().replace(/[.,;:!?]+$/,'');
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)L[i][j]=norm(A[i])===norm(B[j])?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+  let i=0,j=0,out=[];while(i<n&&j<m){if(norm(A[i])===norm(B[j])){out.push(esc(B[j]));i++;j++}else if(L[i+1][j]>=L[i][j+1]){out.push(`<del>${esc(A[i])}</del>`);i++}else{out.push(`<ins>${esc(B[j])}</ins>`);j++}}
+  while(i<n)out.push(`<del>${esc(A[i++])}</del>`);while(j<m)out.push(`<ins>${esc(B[j++])}</ins>`);return out.join(' ')}
+function showFix(){const c=R.certificate,rd=R.rd;showState(true);$('fixbtn').classList.add('hidden');$('toggle').classList.remove('hidden');
+  const changed=R.rewrite.trim()!==R.case.message.trim();
+  $('fix-why').textContent=c.statements.length?`The shortest set of facts that rules out every reading some reader preferred has ${c.minimum_length} item${c.minimum_length===1?'':'s'}${c.proved_optimal?' (proved by the integer programme)':''}.`+(c.added_after_rereading?` ${c.added_after_rereading} more added after re-reading.`:''):'Every reader already understands it: nothing needs adding.';
+  $('stmts').innerHTML=c.statements.map(s=>`<div class="stmt">${esc(s.statement)}<br>${s.rules_out.map(x=>`<span class="chip">rules out: ${esc(rd[x])}</span>`).join('')}</div>`).join('');
+  $('diff').innerHTML=changed?diffWords(R.case.message,R.rewrite):esc(R.rewrite)+' <span class="muted">(unchanged)</span>';
+  $('rewrite').textContent=R.rewrite;
+  const cs=R.candidates||[];$('cands').innerHTML=cs.length>1?'<tr><th>Wording</th><th>Words</th><th>Glimmer</th>'+(R.second?'<th>Spark</th>':'')+'</tr>'+cs.map(x=>`<tr class="${x.text===R.rewrite?'kept':''}"><td>${esc(x.text)}${x.text===R.rewrite?' <span class="tagl m">kept</span>':''}</td><td>${x.words}</td><td>${pct(x.rate)}</td>${R.second?`<td>${x.rate2==null?'not read':pct(x.rate2)}</td>`:''}</tr>`).join(''):'<tr><td class="muted">Only one wording was needed.</td></tr>';
+  $('a-text').textContent=cs.length>1?'Kept: the shortest wording understood by the most readers.':'';
+  if(R.context){const cx=R.context;$('ctx-body').innerHTML=(cx.question?`<p><b>Ask first:</b> ${esc(cx.question)}</p>`:'')+(cx.unreachable.length?`<p class="muted">${cx.unreachable.length} readers misread every wording on their own; settle this before the message.</p>`:'')+Object.entries(cx.messages||{}).map(([g,m])=>`<p><b>${esc(g)}:</b> ${esc(m)}</p>`).join('');$('ctx').classList.remove('hidden')}
+  const h=R.holdout,s2=R.second;
+  $('stats').innerHTML=`<div class="stat"><span class="muted">Muse Glimmer panel</span><b>${pct(R.before.filter(x=>x.understood).length/R.before.length)} → ${pct(c.panel_understood)}</b></div>`+
+    (s2?`<div class="stat"><span class="muted">Muse Spark second opinion</span><b>${pct(s2.before_rate)} → ${pct(s2.after_rate)}</b></div>`:'')+
+    (h?`<div class="stat"><span class="muted">Readers never used to build it (${h.readers.length})</span><b>${pct(h.before)} → ${pct(h.after)}</b></div>`:'')+
+    `<div class="stat"><span class="muted">Shortest set of facts</span><b>${c.minimum_length??0}</b><span class="muted">${c.proved_optimal?'proved minimal':''}</span></div>`+
+    `<div class="stat"><span class="muted">Bound for new readers like these</span><b>≤ ${pct(c.unseen_reader_bound)}</b><span class="muted">misread, 95% confidence</span></div>`;
+  renderAttr();
+  $('fix').classList.remove('hidden');$('proof').classList.remove('hidden');$('fix').scrollIntoView({behavior:'smooth'})}
+async function fetchAttribution(){const r0=R;try{const r=await fetch('/api/attribution',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({case:R.case})});
+  if(!r.ok)return;const d=await r.json();if(R!==r0)return;R.attribution=d.attribution;if(!$('proof').classList.contains('hidden'))renderAttr()}catch(e){}}
+function renderAttr(){$('attr').innerHTML='';
+  if(R.attribution&&R.attribution.length){const base=R.attribution[0].misreaders_with_it;let html=esc(R.case.message);
+    R.attribution.filter(a=>a.misreaders_without_it<base).forEach(a=>{const p=esc(a.phrase);html=html.replace(p,`<mark>${p}</mark>`)});
+    $('attr').innerHTML=html.includes('<mark>')?`<div class="muted">Words that cause the misreading (removing them changes how many misread):</div><div style="font-size:17px;margin-top:4px">${html}</div>`:''}}
+
+function resultFor(panel,i,after){const src=panel==='build'?(after?R.after:R.before):(R.second&&(after?R.second.after:R.second.before));return src?src[i]:null}
+function optionBars(res){const ids=Object.keys(res.probs).sort((a,b)=>res.probs[b]-res.probs[a]);
+  return ids.map(id=>{const meant=id===R.case.intended,chosen=id===res.choice;
+    return `<div class="opt ${meant?'meant':''} ${chosen?'chosen':''}"><div class="t"><span>${esc(R.rd[id])}${meant?'<span class="tagl m">you meant</span>':''}${chosen&&!meant?'<span class="tagl c">acts on this</span>':''}</span><span>${pct(res.probs[id])}</span></div><div class="b"><i style="width:${Math.max(1,Math.round(100*res.probs[id]))}%"></i></div></div>`}).join('')}
+function openReader(panel,i){if(!R||!R.personas)return;const P=panel==='build'?R.personas.build:R.personas.second,p=P&&P[i];if(!p)return;
+  const after=AFTER&&!!R.after,res=resultFor(panel,i,after);if(!res)return;CUR={panel,i};
+  const before=resultFor(panel,i,false),aft=R.after?resultFor(panel,i,true):null,l=label(p);
+  const model=panel==='build'?'<span class="model g">Muse Glimmer reader</span>':'<span class="model s">Muse Spark reader</span>';
+  const text=after?R.rewrite:R.case.message;
+  const say=res.understood?`<div class="say ok">This reader acts on what you meant (${pct(res.probs[R.case.intended])}).</div>`:
+    `<div class="say bad">This reader takes it to mean <b>${esc(R.rd[res.choice])}</b> (${pct(res.probs[res.choice])}), not what you meant (${pct(res.probs[R.case.intended]||0)}).</div>`;
+  const quality=panel==='build'?`Probability on the answer letters: ${pct(res.letter_mass)}. The reading is the next-token probability of each option letter, averaged over two option orders.`:
+    `Usable answers: ${pct(res.letter_mass)} of its replies named an option. Muse Spark gives no token probabilities, so each reading is its answer in two option orders.`;
+  let compare='';if(aft&&before&&!$('fix').classList.contains('hidden')){compare=`<h3>Before and after the fix</h3><div class="cols"><div><div class="muted">As written: ${before.understood?'understood':'misread'}</div>${optionBars(before)}</div><div><div class="muted">After the fix: ${aft.understood?'understood':'misread'}</div>${optionBars(aft)}</div></div>`}
+  $('drawer').innerHTML=`<div class="top"><div>${model}<h2 id="d-title">${l.who}</h2><div class="muted">${esc(l.sub)}</div></div><button onclick="closeReader()" aria-label="Close">✕</button></div>
+    ${say}
+    <h3>How this reader was set up</h3><div class="quote">${esc(p.prompt||'')}</div>${p.reasoning&&panel==='build'?`<div class="muted" style="margin-top:4px">Reasoning setting: ${esc(p.reasoning==='low'?'quick (low)':p.reasoning==='high'?'careful (high)':p.reasoning)}</div>`:''}
+    <h3>What it read ${after?'(the fix)':'(as written)'}</h3><div class="quote">${esc(text)}</div>
+    <h3>How likely it found each reading</h3><div class="muted">Asked which of these the sender most likely means.</div>${optionBars(res)}
+    ${compare}
+    <h3>Answer quality</h3><div class="muted">${quality}</div>
+    <div class="row"><button onclick="stepReader(-1)">‹ Previous reader</button><button onclick="stepReader(1)">Next reader ›</button></div>`;
+  $('drawer').classList.remove('hidden');$('scrim').classList.remove('hidden');$('drawer').focus()}
+function stepReader(d){if(!CUR)return;const P=CUR.panel==='build'?R.personas.build:R.personas.second;openReader(CUR.panel,(CUR.i+d+P.length)%P.length)}
+function closeReader(){CUR=null;$('drawer').classList.add('hidden');$('scrim').classList.add('hidden')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeReader();if(CUR&&e.key==='ArrowRight')stepReader(1);if(CUR&&e.key==='ArrowLeft')stepReader(-1);
+  if((e.ctrlKey||e.metaKey)&&e.key==='Enter'&&!$('go').disabled)run()});
+
+async function loadEvidence(){if(EV)return;try{EV=await (await fetch('/api/results')).json()}catch(e){$('ev-table').innerHTML='<tr><td class="err">Results not available.</td></tr>';return}
+  const e=EV['eval_v1.4'],c=EV.crossmodel;if(!e){$('ev-table').innerHTML='<tr><td class="err">Results not available.</td></tr>';return}const s=e.summary;
+  $('ev-stats').innerHTML=`<div class="stat"><span class="muted">Readers never used to build the fixes (pre-registered)</span><b>${pct(s.heldout_before)} → ${pct(s.heldout_after)}</b><span class="muted">gain ${Math.round(100*s.gain)} points, 95% interval ${Math.round(100*s.gain_95ci[0])} to ${Math.round(100*s.gain_95ci[1])}</span></div>`+
+    (c?`<div class="stat"><span class="muted">Muse Spark, which built nothing, on the same fixes (pre-registered)</span><b>+${Math.round(100*c.HM1_fixed_minus_original)} points</b><span class="muted">95% interval ${Math.round(100*c.HM1_95ci[0])} to ${Math.round(100*c.HM1_95ci[1])}</span></div>`:'')+
+    `<div class="stat"><span class="muted">Messages made worse</span><b>${s.H2_no_harm} of ${s.messages}</b></div>`+
+    `<div class="stat"><span class="muted">Facts added (median)</span><b>${s.H3_median_statements}</b></div>`;
+  evFilter('all')}
+function evFilter(f){['all','people','agents','changed'].forEach(x=>$('f-'+x).classList.toggle('on',x===f));if(!EV)return;
+  const e=EV['eval_v1.4'],c=EV.crossmodel,cm={};(c?c.rows:[]).forEach(r=>cm[r.message]=r);
+  const rows=e.rows.filter(r=>f==='all'||(f==='changed'?r.statements>0:r.mode===f));
+  $('ev-table').innerHTML='<tr><th>Message</th><th>Unseen Glimmer readers</th><th>Muse Spark</th><th>Final wording</th></tr>'+rows.map(r=>{const k=e.rows.indexOf(r),x=cm[r.message];
+    return `<tr class="click" onclick="evOpen(${k})"><td>${esc(r.message)}<div class="muted">${r.mode==='agents'?'AI agent':'people'}</div></td><td>${pct(r.heldout_before)} → ${pct(r.heldout_after)}</td><td>${x?(x.changed?`${pct(x.original)} → ${pct(x.fixed)}`:pct(x.original)):'·'}</td><td>${r.statements?esc(r.rewrite):'<span class="muted">unchanged: already understood</span>'}</td></tr><tr id="ev-${k}" class="hidden"><td colspan="4"></td></tr>`}).join('')}
+function evOpen(k){const r=EV['eval_v1.4'].rows[k],row=$('ev-'+k);if(!row)return;
+  if(!row.classList.contains('hidden')){row.classList.add('hidden');return}
+  row.firstElementChild.innerHTML=(r.meaning?`<div class="muted">Meant: ${esc(r.meaning)}</div>`:'')+((r.candidates||[]).length>1?'<table><tr><th>Wording tried</th><th>Words</th><th>Glimmer panel</th></tr>'+r.candidates.map(x=>`<tr class="${x.text===r.rewrite?'kept':''}"><td>${esc(x.text)}</td><td>${x.words}</td><td>${pct(x.rate)}</td></tr>`).join('')+'</table>':'<div class="muted">Every panel reader already understood it.</div>');
+  row.classList.remove('hidden')}
+
+function copyRewrite(){navigator.clipboard.writeText(R.rewrite);$('copybtn').textContent='Copied';setTimeout(()=>$('copybtn').textContent='Copy',1500)}
+function downloadReport(){const c=counts(false),a=counts(true),L=[];
+  L.push('# Meaning Check report','',`Message: ${R.case.message}`,`Meant: ${R.rd[R.case.intended]}`,'',`As written: ${c.n} of ${c.t} readers understand it.`);
+  R.before.forEach((x,i)=>{if(!x.understood)L.push(`- Muse Glimmer, ${R.personas.build[i].country}: reads "${R.rd[x.choice]}"`)});
+  if(R.second)R.second.before.forEach((x,i)=>{if(!x.understood)L.push(`- Muse Spark, ${R.personas.second[i].country}: reads "${R.rd[x.choice]}"`)});
+  L.push('',`Fix: ${R.rewrite}`,`After the fix: ${a.n} of ${a.t} readers understand it.`);
+  if(R.holdout)L.push(`Readers never used to build it: ${pct(R.holdout.before)} before, ${pct(R.holdout.after)} after.`);
+  L.push('','Facts stated:',...R.certificate.statements.map(s=>`- ${s.statement}`));
+  const b=new Blob([L.join('\n')],{type:'text/markdown'});const u=URL.createObjectURL(b);const el=document.createElement('a');el.href=u;el.download='meaning-check-report.md';el.click();setTimeout(()=>URL.revokeObjectURL(u),2000)}
+async function testMine(){const t=$('mine').value.trim();if(!t)return;$('mine-out').textContent='Reading…';
+  const r=await fetch('/api/test',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({case:R.case,text:t,statements:[]})});
+  const d=await r.json();if(!r.ok){$('mine-out').innerHTML=`<span class="err">${esc(d.detail)}</span>`;return}
+  const n=d.panel.filter(x=>x.understood).length;
+  $('mine-out').textContent=`Muse Glimmer: ${n} of ${d.panel.length}`+(d.second?`; Muse Spark: ${d.second.filter(x=>x.understood).length} of ${d.second.length}`:'')+`; unseen readers: ${pct(d.heldout_rate)}; ${d.words} words (the fix: ${R.rewrite.split(/\s+/).length}).`}
+function pickImage(){$('img').click()}
+function readImage(inp){const f=inp.files[0];if(!f)return;const fr=new FileReader();fr.onload=async()=>{$('status').textContent='Reading the image…';
+  const r=await fetch('/api/image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:fr.result.split(',')[1],mime:f.type})});const d=await r.json();
+  if(r.ok){$('msg').value=d.text;$('status').textContent='Text read from the image by Muse Spark.'}else $('status').innerHTML=`<span class="err">${esc(d.detail)}</span>`};fr.readAsDataURL(f)}
+async function toggleMic(){if(rec){rec.stop();return}
+  try{const s=await navigator.mediaDevices.getUserMedia({audio:true});rec=new MediaRecorder(s);chunks=[];rec.ondataavailable=e=>chunks.push(e.data);
+    rec.onstop=async()=>{$('mic').textContent='Speak';s.getTracks().forEach(t=>t.stop());const fd=new FormData();fd.append('file',new Blob(chunks,{type:'audio/webm'}),'voice.webm');
+      $('status').textContent='Transcribing…';const r=await fetch('/api/voice',{method:'POST',body:fd});const d=await r.json();rec=null;
+      if(r.ok){$('msg').value=d.text;$('status').textContent='Transcribed.'}else $('status').innerHTML=`<span class="err">${esc(d.detail)}</span>`};
+    rec.start();$('mic').textContent='Stop'}catch(e){$('status').innerHTML='<span class="err">Microphone not available.</span>'}}
+init();
+</script>
+</body>
+</html>
